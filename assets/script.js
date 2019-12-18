@@ -70,14 +70,6 @@ var cityName = $("input:text").val();
     })
   // We store all of the retrieved data inside of an object called "response"
   .then(function(response) {
-
-
-          
- // Log the queryURL
-    // console.log(queryURL);
-          
- // Log the resulting object
-    // console.log(response);
    })})
 
 
@@ -109,4 +101,3 @@ $("#button").on("click", function() {
         // console.log(response);
         
       })})
-

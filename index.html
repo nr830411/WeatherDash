@@ -14,29 +14,27 @@
     <title>Weather Dash</title>
 </head>
 <body>
-    <header class="jumbotron">
-        <h1 class="display-3">WEATHER DASHBOARD</h1>
+    <header>
+        <h1>WEATHER DASHBOARD</h1>
             <img id="wicon" src="">
     </header>
 
-    <div class="wrapper">
+<div class="Container">
+    <div class = "row-lg-6">
+        <div class = "col-lg-6">
             <button class="btn btn-outline-secondary" type="button" id="button">WEATHER</button>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-        <input type="text" id="weather-input">
+            <input type="text" id="weather-input">
         </div>
-    </div>
-
-    <div class ="container" id="daWeather">
-        <div class="row">
-            <div class ="col-lg-12">
-              <div id="weather">
-              </div>
+        <div class = "col-lg-6" id="daWeather">
+            <div id="weather">
             </div>
         </div>
+        </div>
+    <div class = "row-lg-6">
     </div>
+</div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="assets/script.js"></script>

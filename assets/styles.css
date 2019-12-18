@@ -4,23 +4,14 @@ body {
     line-height: 1;
   }
 
-.wrapper {
-
-    text-align: center;
-}
 
 #wicon {
 
-    width: 150px;
+    width: 100px;
     height: auto;
 }
 
-.row {
-
-    text-align: center;
-}
-  
-.jumbotron {
+header {
     text-align: center;
     background: transparent;
     color: black;
