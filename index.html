@@ -4,39 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--LINKING FONTAWESOME FOR ICONS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <!--LINKING FONTAWESOME-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--LINKING BOOTSTRAP-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--LINKING STYLE SHEET-->
     <link rel="stylesheet" href="assets/styles.css">
     <title>Weather Dash</title>
 </head>
 <body>
-    <header>
-        <h1>WEATHER DASHBOARD</h1>
-            <img id="wicon" src="">
+    <header class="container-fluid">
+        <h1>Weather Dashboard</h1>
     </header>
 
-<div class="Container">
-    <div class = "row-lg-6">
-        <div class = "col-lg-6">
-            <button class="btn btn-outline-secondary" type="button" id="button">WEATHER</button>
-            <input type="text" id="weather-input">
+<div class="container-fluid">
+    <div class="row">
+      <aside class="col-lg-3">
+            <h5 class="mt-1">Search for a City:</h5>
+        <div class="form-inline form-group">
+            <input class="form-control" type="text" id="weather-input">
+            <button class="btn btn-primary" id="weatherButton"> 
+                <i class="fa fa-search"></i>
+            </button>
         </div>
-        <div class = "col-lg-6" id="daWeather">
-            <div id="weather">
-            </div>
-        </div>
-        </div>
-    <div class = "row-lg-6">
+
+
+        <ul class="list-group history"></ul>
+      </aside>
+
+<div class="col-lg-9">
+      <div id="today" class="mt-3"></div>
+      <div id="forecast" class="mt-3"></div>
     </div>
+  </div>
 </div>
 
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="assets/script.js"></script>
+
 </body>
 </html>

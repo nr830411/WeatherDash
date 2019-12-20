@@ -1,103 +1,66 @@
-    // function displayWXInfo() {
-    var APIKey = "8e03668d7e9ea45db9f3e50290b81597";
-    
-    // Function to get input field text
-    $("#button").on("click", function() {
+$(document).ready(function() {
+  $("#weatherButton").on("click", function() {
+    var searchValue = $("#weather-input").val();
 
-      var cityName = $("input:text").val();
-        document.getElementById("weather-input").innerHTML = cityName; 
+    // clear input box
+    $("#weather-input").val("");
 
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
+    searchWeather(searchValue);
+  });
 
+  $(".history").on("click", "li", function() {
+    searchWeather($(this).text());
+  });
+
+  function makeRow(text) {
+    var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
+    $(".history").append(li);
+  }
+
+  function searchWeather(searchValue) {
     $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response) {
+      type: "GET",
+      url: "http://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=8e03668d7e9ea45db9f3e50290b81597&units=imperial",
+      dataType: "json",
+      success: function(data) {
 
-        console.log(response)
+        if (history.indexOf(searchValue) === -1) {
+          history.push(searchValue);
+          window.localStorage.setItem("history", JSON.stringify(history));
     
-        var wxDiv = $("<div>");
-        var city = response.name;
-        var country = response.sys.country
-        var pOne = $("<p>").text("City: " + city + ", " + country);
-        var wind = response.wind.speed;
-        var pTwo = $("<p>").text("Wind Speed: " + wind + "mph");
-        var tempF = (response.main.temp - 273.15) * 1.80 + 32
-        var pThree = $("<p>").text("Temp: " + tempF + " (F)")
-        var humidity = response.main.humidity
-        var pFour = $("<p>").text("Humidity: " + humidity + "%")
-        //
-        var iconCode = response.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+          makeRow(searchValue);
+        }
+        
+        $("#today").empty();
 
-        //
-        console.log(iconCode)
-        
-        
-        
-        
-        //var date = response.dt
-        
-        
-        
-        wxDiv.append(pOne);
-        wxDiv.append(pTwo);
-        wxDiv.append(pThree);
-        wxDiv.append(pFour);
-        // wxDiv.append(pSix);
-      $("#weather").prepend(wxDiv);
-      $('#wicon').attr('src', iconUrl);
-    
-      })
-    })
-        
-$("#button").on("click", function() {
+        var name = $("<h3>").addClass("card-title").text(data.name + " (" + new Date().toLocaleDateString() + ")");
+        var card = $("<div>").addClass("card");
+        var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
+        var hum = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
+        var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + " °F");
+        var cardBody = $("<div>").addClass("card-body");
+        var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+
       
+        name.append(img);
+        cardBody.append(name, temp, hum, wind);
+        card.append(cardBody);
+        $("#today").append(card);
 
-
-
-var cityName = $("input:text").val();
- document.getElementById("weather-input").innerHTML = cityName; 
- // Here we are building the URL we need to query the database
- var queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=37.75&lon=-122.37" + "&appid=" + APIKey;
-//   "q=Bujumbura,Burundi&units=imperial&appid=" + APIKey;
-
-          
       
-    $.ajax({
-    url: queryURL,
-    method: "GET"
-    })
-  // We store all of the retrieved data inside of an object called "response"
-  .then(function(response) {
-   })})
+        getForecast(searchValue);
+      }
+    });
+  }
 
 
+  var history = JSON.parse(window.localStorage.getItem("history")) || [];
 
-// FIVE DAY FORECAST
+  if (history.length > 0) {
+    searchWeather(history[history.length-1]);
+  }
 
-$("#button").on("click", function() {
-
-  var cityName = $("input:text").val();
-  document.getElementById("weather-input").innerHTML = cityName; 
-  // Here we are building the URL we need to query the database
-  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + APIKey;
-  // "q=Bujumbura,Burundi&units=imperial&appid=" + APIKey;
-  
-
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-
-
-      // We store all of the retrieved data inside of an object called "response"
-      .then(function(response) {
-
-        // Log the queryURL
-        // console.log(queryURL);
-
-        // Log the resulting object
-        // console.log(response);
-        
-      })})
+  for (var i = 0; i < history.length; i++) {
+    makeRow(history[i]);
+  }
+});
