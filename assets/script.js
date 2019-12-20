@@ -48,11 +48,43 @@ $(document).ready(function() {
         $("#today").append(card);
 
       
-        //getForecast(searchValue)
+        getForecast(searchValue)
         getUVIndex(data.coord.lat, data.coord.lon);
       }
     });
   }
+
+function getForecast(searchValue) {
+  $.ajax({
+    type: "GET",
+    url: "http://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=8e03668d7e9ea45db9f3e50290b81597&units=imperial",
+    dataType: "json",
+    success: function(data) {
+        
+        $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
+
+        for (var i = 0; i < data.list.length; i++) {
+    
+          if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+            
+            
+            var col = $("<div>").addClass("col-md-2");
+            var card = $("<div>").addClass("card");
+            var body = $("<div>").addClass("card-body p-2");
+            var title = $("<h5>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
+            var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+            var pOne = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
+            var pTwo = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
+
+          
+            col.append(card.append(body.append(title, img, pOne, pTwo)));
+            $("#forecast .row").append(col);
+          }
+        }
+      }
+    });
+  }
+
 
 function getUVIndex(lat, lon) {
     $.ajax({

@@ -17,7 +17,13 @@ header {
 h1 {
 
     font-size: 70px;
-    font-stretch: narrower;
+    
+}
+
+h5 {
+
+    background-color: white;
+   
 }
 
 .container-fluid {
