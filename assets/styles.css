@@ -11,7 +11,7 @@ header {
     text-align: center;
     color: black;
     border-radius: 0;
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid, thistle;
   }
 
 h1 {
@@ -20,7 +20,7 @@ h1 {
     
 }
 
-h5 {
+aside {
 
     background-color: white;
    
@@ -34,5 +34,6 @@ h5 {
 
 #today {
 
-    padding: 20px;
+    padding: 40px;
 }
+
