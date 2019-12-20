@@ -48,10 +48,26 @@ $(document).ready(function() {
         $("#today").append(card);
 
       
-        getForecast(searchValue);
+        //getForecast(searchValue)
+        getUVIndex(data.coord.lat, data.coord.lon);
       }
     });
   }
+
+function getUVIndex(lat, lon) {
+    $.ajax({
+      type: "GET",
+      url: "http://api.openweathermap.org/data/2.5/uvi?appid=7ba67ac190f85fdba2e2dc6b9d32e93c&lat=" + lat + "&lon=" + lon,
+      dataType: "json",
+      success: function(data) {
+        var uv = $("<p>").text("UV Index: ");
+        var btn = $("<button>").addClass("btn").text(data.value);
+        
+        $("#today .card-body").append(uv.append(btn));
+      }
+    });
+  }
+
 
 
   var history = JSON.parse(window.localStorage.getItem("history")) || [];
