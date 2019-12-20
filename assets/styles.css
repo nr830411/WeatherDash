@@ -1,18 +1,32 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 23px;
     line-height: 1;
+    background-color: thistle
   }
 
 header {
+
+    margin: auto;
     text-align: center;
     color: black;
     border-radius: 0;
     border-bottom: 5px solid black;
   }
 
+h1 {
+
+    font-size: 70px;
+    font-stretch: narrower;
+}
+
 .container-fluid {
 
     background-color: thistle;
 
+}
+
+#today {
+
+    padding: 20px;
 }
